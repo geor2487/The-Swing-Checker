@@ -231,7 +231,7 @@ export default function Home() {
             <div className="space-y-3 mb-6 text-sm">
               <div className="flex gap-3 items-start">
                 <span className="w-6 h-6 bg-emerald-500 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">1</span>
-                <span>録画ボタンを押す（{recordingDuration}秒録画）</span>
+                <span>画面をタップして録画開始（{recordingDuration}秒）</span>
               </div>
               <div className="flex gap-3 items-start">
                 <span className="w-6 h-6 bg-emerald-500 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">2</span>
@@ -299,7 +299,8 @@ export default function Home() {
             autoPlay
             playsInline
             muted
-            className={`w-full h-full object-cover ${facingMode === 'user' ? 'scale-x-[-1]' : ''}`}
+            onClick={mode === 'camera' ? startRecording : undefined}
+            className={`w-full h-full object-cover ${facingMode === 'user' ? 'scale-x-[-1]' : ''} ${mode === 'camera' ? 'cursor-pointer' : ''}`}
           />
         )}
 
@@ -336,8 +337,9 @@ export default function Home() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
               </svg>
             </button>
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 px-3 py-1.5 rounded-full text-sm backdrop-blur-sm">
-              {recordingDuration}秒録画
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 px-4 py-2 rounded-full text-sm backdrop-blur-sm text-center">
+              <div className="text-white font-medium">タップして録画</div>
+              <div className="text-zinc-400 text-xs">{recordingDuration}秒</div>
             </div>
           </>
         )}
@@ -347,12 +349,9 @@ export default function Home() {
       <div className="bg-zinc-900 p-4">
         {mode === 'camera' && (
           <div className="flex justify-center">
-            <button
-              onClick={startRecording}
-              className="w-20 h-20 bg-red-500 rounded-full flex items-center justify-center shadow-lg shadow-red-500/30"
-            >
-              <div className="w-8 h-8 bg-white rounded"></div>
-            </button>
+            <div className="text-zinc-400 text-sm">
+              画面をタップして録画開始
+            </div>
           </div>
         )}
 
